@@ -6,6 +6,7 @@ import 'package:ecom/models/response/product_entity.dart';
 import 'package:ecom/ui/products/bloc/product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:badges/badges.dart' as BadgesPackage;
 
 import '../../../di/service_locator.dart';
 import '../widgets/item_card.dart';
@@ -30,28 +31,28 @@ class _ProductsPageState extends State<ProductsPage> {
             BlocBuilder<ProductCubit, ProductState>(
               builder: (context, state) {
                 return IconButton(
-                  icon: Badge(
-                      badgeColor: Colors.white,
-                      badgeContent: state is ProductsUpdated
-                          ? Text(
-                              state.products
-                                  .fold<int>(
-                                      0,
-                                      (sum, product) =>
-                                          sum + (product?.quantity ?? 0))
-                                  .toString(),
-                              style: const TextStyle(fontSize: 12),
-                            )
-                          : null,
-                      showBadge: state is ProductsUpdated &&
-                          state.products.fold<int>(
+                icon: BadgesPackage.Badge(
+                    // badgeColor: Colors.white,
+                    badgeContent: state is ProductsUpdated
+                        ? Text(
+                            state.products
+                                .fold<int>(
                                   0,
                                   (sum, product) =>
-                                      sum + (product?.quantity ?? 0)) >
-                              0,
-                      child: const Icon(
-                        Icons.shopping_cart_outlined,
-                      )),
+                                      sum + (product?.quantity ?? 0),
+                                )
+                                .toString(),
+                            style: const TextStyle(fontSize: 12),
+                          )
+                        : null,
+                    showBadge: state is ProductsUpdated &&
+                        state.products.fold<int>(
+                                0,
+                                (sum, product) =>
+                                    sum + (product?.quantity ?? 0)) >
+                            0,
+                    child: const Icon(Icons.shopping_cart_outlined),
+                  ),
                   onPressed: () {
                     Navigator.pushNamed(context, Routes.cartPage);
                   },
@@ -128,4 +129,3 @@ class _ProductsPageState extends State<ProductsPage> {
     // locator<ProductCubit>().loadsProducts();
   }
 }
-

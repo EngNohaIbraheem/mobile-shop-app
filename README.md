@@ -1,8 +1,6 @@
-# Flutter Ecommerce Demo
+# Mobile shop store 
 
-A basic responsive ecommerce project based on Flutter 3.
 
-**Live Demo:** https://shubham-gupta-16.github.io/flutter_ecommerce_demo/
 
 ## Features
 - Retrofit 🚀
